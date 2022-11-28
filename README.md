@@ -1,1 +1,5 @@
-# TestingTasks
+# Test Task from Sourceful ICT
+
+## Technologies:
+* Python 3.10
+* Selenium Framework

@@ -1,12 +1,17 @@
+# Importing necessary modules
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 import re
 from selenium.webdriver.common.by import By
 
+import time
+
 
 # options = Options()
 # options.headless = True
+# WebDriver Firefox
 driver = webdriver.Firefox()
+# Target URL
 driver.get("https://sourceful.nl/nl/contact-pl/")
 your_name = driver.find_element(By.XPATH, '//input[@name = "your-name"]')
 your_name.send_keys("Jan Kowalski")
@@ -18,25 +23,19 @@ your_name.send_keys("Jan Kowalski")
 # your_message.send_keys("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt "
 #                        "ut labore et dolore magna aliqua.")
 submit_btn = driver.find_element(By.XPATH, "//input[@value='Wyślij']")
-print("Element is visible? " + str(submit_btn.is_displayed()))
+# print("Element is visible? " + str(submit_btn.is_displayed()))
 driver.execute_script("arguments[0].click();", submit_btn)
 
 # form_msg_div = driver.find_element(By.CLASS_NAME, 'wpcf7-response-output')
-print(driver.find_element(By.CLASS_NAME, 'wpcf7-response-output').text)
-# form_msg = form_msg_div.get_attribute("textContent")
+# To load entire webpage
+time.sleep(5)
+
+form_msg = driver.find_element(By.XPATH, '//div[@class ="wpcf7-response-output"]').text
 # print(form_msg)
-# assert form_msg_div =='One or more fields have an error. Please check and try again.'
+# assert form_msg =='One or more fields have an error. Please check and try again.'
+assert re.fullmatch("One or more fields have an error. Please check and try again.", form_msg)
+# assert re.fullmatch("One", form_msg)
+# assert re.fullmatch("no", form_msg)
 
-# # form_msg = form_msg_div.get_text()
-# print(form_msg_div)
-# if re.search("One or more fields have an error. Please check and try again.",form_msg_div):
-#     print('ok')
-# # assert re.search("One or more fields have an error. Please check and try again.", form_msg_div)
-
-
-
-
-
-
-
+# Closing the driver
 driver.quit()

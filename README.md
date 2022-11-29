@@ -3,3 +3,4 @@
 ## Technologies:
 * Python 3.10
 * Selenium Framework
+* Appium Framework

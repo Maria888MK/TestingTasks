@@ -5,7 +5,7 @@ from selenium.webdriver.firefox.options import Options
 @pytest.fixture
 def selenium_browser(request):
     options = Options()
-    options.headless = True
+    options.headless = False
     driver = webdriver.Firefox(options=options)
     yield driver
     driver.quit()
